@@ -1,0 +1,141 @@
+<body>
+    <article class="page">
+      <div class="page__container">
+        <h1 class="page__title">Estatística de Acurácia</h1>
+        <p>Selecione o nível e o bioma nas caixas abaixo para visualização dos resultados estatísticos de acurácia</p>
+        <div class="stats__filter-box">
+          <div class="stats__filter">
+            <label class="stats__label" for="bioma">Bioma</label>
+            <select id="bioma">
+              <option value="Amazonia">Amazônia</option>
+              <option value="Mata Atlantica">Mata Atlântica</option>
+              <option value="Cerrado">Cerrado</option>
+              <option value="Caatinga">Caatinga</option>
+              <option value="Pantanal">Pantanal</option>
+              <option value="Pampa">Pampa</option>
+              <option value="Global">Global</option>
+            </select>
+          </div>
+          <div class="stats__filter">
+            <label class="stats__label" for="bioma">Nível</label>
+            <select name="Nível" id="nivel">
+              <option value="lv1">Nível 1</option>
+              <option value="lv2">Nível 2</option>
+              <option value="lv3">Nível 3</option>
+            </select>
+          </div>
+          <div class="stats__filter-button">
+            <button id = "dataButton" type="button" class="primary action-button">Buscar</button>
+          </div>
+        </div>
+
+        <div class="stats__value">
+          <div class="stats__value-item">
+            <span class="stats__value-item--label">
+              Acurácia Geral
+            </span>
+            <span id = accvb class="shiny-text-output stats__value-item--porcent"></span>
+          </div>
+          <div class="stats__value-item ">
+            <span class="stats__value-item--label">
+              Discordância de alocação
+            </span>
+            <span id = allocvb class="shiny-text-output stats__value-item--porcent"></span>
+          </div>
+          <div class="stats__value-item">
+            <span class="stats__value-item--label">
+              Discordância de Área
+            </span>
+            <span id = areavb class="shiny-text-output stats__value-item--porcent"></span>
+          </div>
+        </div>
+
+        <div class="stats__tabs">
+          <input type="radio" id="tab-1" name="tab-group-1" checked hidden>
+          <input type="radio" id="tab-2" name="tab-group-1" hidden>
+          <input type="radio" id="tab-3" name="tab-group-1" hidden>
+          <label class="label-tab-1" for="tab-1">Acurácia Geral</label>
+          <label class="label-tab-2" for="tab-2">Confusões de classe</label>
+          <label class="label-tab-3" for="tab-3">Histórico da classe</label>
+
+          <div class="stats__tab-item tab-1">
+            <div>
+              <h3>Acuracia Geral (aqui os graficos são exibidos)</h3>
+              <div class="highchart html-widget-output" id="acctotal"></div>
+            </div>
+            <div>
+              <h3>Confusões de Classe</h3>
+              <div>
+                            <div class="stats__filter">
+              <label class="control-label" for="select_ano">Ano</label>
+                <div>
+                  <select id="select_ano">
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012">2012</option>
+                    <option value="2011">2011</option>
+                    <option value="2010">2010</option>
+                    <option value="2009">2009</option>
+                    <option value="2008">2008</option>
+                    <option value="2007">2007</option>
+                    <option value="2006">2006</option>
+                    <option value="2005">2005</option>
+                    <option value="2004">2004</option>
+                    <option value="2003">2003</option>
+                    <option value="2002">2002</option>
+                    <option value="2001">2001</option>
+                    <option value="2000">2000</option>
+                    <option value="Todos">Todos</option></select>
+                </div>
+              </div>
+              </div>
+              <div>
+                <h5> Acurácia do usuário</h5>
+                <div class="shiny-html-output" id="userui"></div>
+                
+              </div>
+              <div>
+                <h5>Acuracia Produtor</h5>
+                <div class="shiny-html-output" id="producerui"></div>
+              </div>
+            </div>
+            <div>
+              <h3>Histórico da Classe</h3>
+              <div>
+                <div class="shiny-html-output" id="select_classe_ctlr"></div>
+                <h5> Visão do usuário </h5>
+                <div class="highchart html-widget html-widget-output" id="cl_user"></div>
+                
+                <h5> Visão do produtor </h5>
+                <div id = "cl_producer" class="highchart html-widget html-widget-output"></div>
+              </div>
+              <div>
+                
+              </div>
+            </div>
+          </div>
+            
+          <div class="stats__tab-item tab-2">
+            Acuracia do Usuário (aqui os gráficos não são exibidos)
+          </div>
+          
+          <div class="stats__tab-item tab-3">
+          (Não exibe o gráfico)
+
+          </div>
+          
+        </div>
+      </div>
+    </article>
+    <script type="text/javascript">
+      (function () {
+        if (! localStorage.justOnce) {
+            localStorage.setItem("justOnce", "true");
+            window.location.reload();
+            localStorage.setItem("justOnce", "false")
+        }
+      })()
+    </script>
+  </body>
