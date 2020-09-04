@@ -38,6 +38,6 @@ This repository organizes the MapBiomas accuracy codes.
 ## 3. Visualize accuracy information using R/Shiny
 
 To visualize the accuracy information that you have process you need to:
-* Copy the directories *lv1*, *lv2* and *lv3* to the directory **src/visualization_codes/integracao/ **
+* Copy the directories *lv1*, *lv2* and *lv3* to the directory **src/visualization_codes/integracao/**
 * Open the src/visualization_codes/App.R code with RStudio
 * Click on Run App (at the top center of the screen)
