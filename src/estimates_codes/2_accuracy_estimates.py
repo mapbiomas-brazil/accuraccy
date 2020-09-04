@@ -506,7 +506,7 @@ def global_se(df, mask, population):
 		glob_var += math.pow(population_s,2) * (1 - nsamples_s/population_s) \
 								* np.var(map_correct_s) / nsamples_s
 
-	glob_var = 1 / (math.pow(population,2) * glob_var)
+	glob_var = (1 / math.pow(population,2)) * glob_var
 	glob_se = 1.96 * math.sqrt(glob_var)
 
 	return glob_se
