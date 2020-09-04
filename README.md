@@ -6,7 +6,7 @@ This repository organizes the MapBiomas accuracy codes.
 
   * Python 3.7 or above
   
-  * scikit-learn library for python
+  * scikit-learn library for Python
   
   * R 3.6.2 o above
   
@@ -30,7 +30,14 @@ This repository organizes the MapBiomas accuracy codes.
 ## 2. Getting Accuracy Assessment information with Python
 
   Open your system terminal and run the following line like **python3 src/estimates_codes/2_accuracy_estimates.py <INPUT_DIR> <OUTPUT_DIR>**. Enter the directory address of the exported files as INPUT_DIR and the output files as OUTPUT_DIR. Sit in a comfortable chair, grab a book, a coffee and wait ... this process can take a while.
-  When the process ends, run the code **3_format_toShinny_for_Unix.sh** (For Windows: 3_format_toShinny_for_Windows.bat) inside the output directory. This code prepares the file names and directory hierarchy for the Shiny reading format. 
+  
+  When the process ends, run the code **3_format_toShinny_for_Unix.sh** (For Windows: 3_format_toShinny_for_Windows.bat) inside the output directory. This code prepares the file names and directory hierarchy for the Shiny reading format.
+  
+  One last change needs to be made. Download the [Sublime](https://www.sublimetext.com/) code editor, drag and drop all .CSV files from the *lv1*, *lv2* and *lv3* output directories, then press Ctrl + Shift + F and replace all the "NA" for NaN (without quotes).
   
 ## 3. Visualize accuracy information using R/Shiny
 
+To visualize the accuracy information that you have process you need to:
+* Copy and replace the directories *lv1*, *lv2* and *lv3* to the directory **src/visualization_codes/integracao/ **
+* Open the src/visualization_codes/App.R code with RStudio
+* Click on Run App (at the top center of the screen)
