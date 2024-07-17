@@ -10,7 +10,7 @@ If you want to dig more deep about the accuracy aproach, you could acess this [p
   
   * scikit-learn library for Python
   
-  * R 3.6.2 o above
+  * R 3.6.2
   
   * R Studio 1.1.2.5 or above
   
