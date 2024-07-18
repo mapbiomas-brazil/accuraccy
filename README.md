@@ -2,6 +2,8 @@
 
 This repository organizes the MapBiomas accuracy codes.
 
+If you want to dig more deep about the accuracy approach, you could acess this [publication](https://www.researchsquare.com/article/rs-819697/v1)
+
 **Requisites**:
 
   * Python 3.7 or above
