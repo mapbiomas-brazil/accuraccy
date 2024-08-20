@@ -7,7 +7,6 @@ import math
 
 from os import path, makedirs
 import os
-import csv
 import numpy as np
 
 from sklearn.metrics import confusion_matrix
@@ -296,7 +295,7 @@ def get_classes(df, level='l3'):
     clas_classes = pd.Index(df['classification'].unique())
     ref_classes = pd.Index(df['reference'].unique())
 
-    acc_classes =clas_classes.intersection(ref_classes)
+    acc_classes = clas_classes.intersection(ref_classes)
 
     val_remap = {}
 
@@ -340,13 +339,19 @@ def read_csvs():
     return df
 
 def classification_report_shinny(df, level, class_names, class_values, region, year,area_out = None):
+    
+    #print(class_names,class_values)
 
     if level == 'l1':
         class_names = sorted(class_names)
         class_values = sorted(class_values)
 
+    #print(class_names,class_values)
+
     y_true = df[['reference']].to_numpy().flatten()
     y_pred = df[['classification']].to_numpy().flatten()
+
+    #pd.DataFrame(confusion_matrix(y_true, y_pred)).to_csv('E:\\ACURACIA_GERAL\\Acurracy\\Code\\OUTPUT_COL6_v9_1_no_EDGE\\teste_matriz.csv',mode='w')
 
     sample_weight = 1 / df[['PESO_VOT']].to_numpy().flatten()
     matrix = confusion_matrix(y_true, y_pred, sample_weight=sample_weight)
@@ -359,11 +364,14 @@ def classification_report_shinny(df, level, class_names, class_values, region, y
     glob_acc, glob_se = global_acc(df)
 
     user_acc, prod_acc, user_se, prod_se = user_prod_acc(df, class_values)
-    refarea_prop, refarea_se = refarea_pop(df, class_values)
+    refarea_prop, refarea_se = refarea_pop(df, class_values) #pop_adj
     map_bias, map_bias_se = calc_map_bias(df, class_values)
 
-    total_col = matrix.sum(axis=0)
-    total_row = matrix.sum(axis=1)
+    total_col = matrix.sum(axis=0) 
+    total_row = matrix.sum(axis=1) #pop_ref
+
+    conf_user = (matrix / total_row[:,np.newaxis])
+    conf_prod = (matrix / np.array(refarea_prop)[np.newaxis,:])
 
     user_acc_tot = np.sum(user_acc * total_row)
     user_se_tot = np.sum(user_se * total_row)
@@ -392,17 +400,17 @@ def classification_report_shinny(df, level, class_names, class_values, region, y
     for i in range(0,len (class_values)):
         for j in range(0,len (class_values)):
             acc_output.append([initiative,collection, region, year, version, level,
-                        class_values[i],class_values[j],matrix[i,j], samples_used[i],\
+                        class_values[i],class_values[j],matrix[i,j],conf_user[i,j],conf_prod[i,j],samples_used[i],\
                         refarea_prop[i],refarea_se[i],prod_acc[i],prod_se[i],1-prod_acc[i],allocation_dis[i],\
                         total_row[j],map_bias[j],map_bias_se[j],user_acc[j],user_se[j],1-user_acc[j],quantity_dis[j],0])
             
     acc_output.append([initiative,collection, region, year, version, level,\
-                        'Total','Total',0,np.sum(samples_used),\
-                        np.sum(refarea_prop), np.sum(refarea_se), prod_acc_tot, prod_se_tot, 1-prod_acc_tot, allocation_dis_tot*100,\
-                        np.sum(total_row),0,sum(map_bias_se),user_acc_tot,user_se_tot,1-user_acc_tot,quantity_dis_tot*100,glob_acc])
+                        'Total','Total',0, np.sum(conf_user),np.sum(conf_prod), np.sum(samples_used),\
+                        np.sum(refarea_prop), np.sum(refarea_se), prod_acc_tot, prod_se_tot, 1-prod_acc_tot, allocation_dis_tot,\
+                        np.sum(total_row),0,sum(map_bias_se),user_acc_tot,user_se_tot,1-user_acc_tot,quantity_dis_tot,glob_acc])
        
     columns_pd = ['iniciative','collection','territory','year','version','level','id_class_ref',
-        'id_class_map','value','Samples_Used','Adj_population','Adj_population_se','Producer_Acc',
+        'id_class_map','value','confusion_user','confusion_prod','Samples_Used','Adj_population','Adj_population_se','Producer_Acc',
         'Producer_stdErr','Omission_Error','Allocation_Tot','Pop_Prop','Pop_Bias',
         'Pop_Bias_SE','User_Acc','User_stdErr','Comission_Error','Quantity_Tot','GlobalAccuracy']
 
@@ -418,6 +426,7 @@ def calculate_prob(df):
 
     samples = df['strata_id'].value_counts().rename_axis('strata_id').reset_index(name='n_samp')
     df = pd.merge(samples, df, on='strata_id')
+    #df['PESO_VOT'] = df['n_samp'] / df['pop']
 
     biomes = df['BioNB'].unique()
 
@@ -704,9 +713,13 @@ def config_class(df):
 
     df.loc[ (df['classification'] == 54) | (df['classification'] == 55) | (df['classification'] == 56), 'classification'] = 33 #Convert areas mapped as 54,55,56 to 33
 
+    #df.loc[ (df['classification'] == 21) & (df['reference'].isin([15,19,20,36,39,40,41,46,47,48])), 'reference'] = 21 #Convert reference from 15,19,20,36 to reference 21 for areas mapped as 21
+    
     df.loc[ (df['classification'] == 21) & (df['reference'].isin([15,19,20,36])), 'reference'] = 21 #Convert reference from 15,19,20,36 to reference 21 for areas mapped as 21
 
     df.loc[ (df['classification'] == 63), 'classification'] = 33    
+
+    #df.loc[ (df['classification'] == 50) & (df['reference'] == 10), 'reference'] = 25
 
     #Pampa 
 
@@ -717,6 +730,7 @@ def config_class(df):
 
     #Mata Atântica
 
+    #df.loc[ (df['BioNB']== 'Mata Atlântica') & (df['classification'] == 11) & (df['reference'] == 13),'classification'] = 11
     df.loc[ (df['BioNB']== 'Mata Atlântica') & (df['classification'] == 11) & (df['reference'] == 13),'reference'] = 11
 
     #Pantanal
@@ -742,15 +756,25 @@ def config_class(df):
 
     return df
 
-df = read_csvs()
+output_all_file =  path.join(input_dir, 'acc_mapbiomas_all.parquet')
 
-total_points = population_estimation(df)
+if os.path.exists(output_all_file) is False:
 
-df = mod_BioNB(df)
+    df = read_csvs()
 
-df = config_class(df)
+    total_points = population_estimation(df)
 
-regions = df['BioNB'].unique().tolist()
+    df = mod_BioNB(df)
+
+    df = config_class(df)
+
+    df.to_parquet(output_all_file)
+
+df = None
+
+dfPq= pd.read_parquet(output_all_file)
+
+regions = dfPq['BioNB'].unique().tolist()
 regions.append('BRASIL')
 
 pd_cols = {'iniciative':[],'collection':[],'territory':[],'year':[],'version':[],'level':[],'id_class_ref':[],
@@ -760,14 +784,14 @@ pd_cols = {'iniciative':[],'collection':[],'territory':[],'year':[],'version':[]
 
 areaEstimatives = pd.DataFrame(pd_cols)
 
-output_area_name = path.join(output_dir, ''.join(['col8_info.csv']))
+output_area_name = path.join(output_dir, ''.join([str(sys.argv[4]) + '.csv']))
 
 mkdirp(output_dir)
 
 for region in regions:
 
     areaEstimatives =None
-    areaEstimatives = accuracy_assessment_all(df, region,areaEstimatives)
+    areaEstimatives = accuracy_assessment_all(dfPq, region,areaEstimatives)
     
     hdr_v2 = False  if os.path.isfile(output_area_name) else True
     areaEstimatives.to_csv(output_area_name,mode='a',header = hdr_v2,index = False)
