@@ -1,19 +1,11 @@
 var biomes = ee.Image('projects/mapbiomas-workspace/AUXILIAR/biomas-raster-41')
 var states = ee.Image('projects/mapbiomas-workspace/AUXILIAR/estados-2016-raster')
 
-var bioDict = {
-    1: 'Amazônia',
-    2: 'Mata Atlântica',
-    3: 'Pantanal',
-    4: 'Cerrado',
-    5: 'Caatinga',
-    6: 'Pampa'
-}
+var bioDict = {1:'Amazônia', 2:'Mata Atlântica', 3:'Pantanal', 4:'Cerrado', 5:'Caatinga', 6:'Pampa'}
 
-var anos = ['1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996',
-    '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010',
-    '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'
-]
+var anos = ['1985', '1986', '1987','1988', '1989', '1990','1991', '1992', '1993','1994', '1995', '1996',
+'1997', '1998', '1999','2000', '2001', '2002','2003', '2004', '2005','2006', '2007', '2008','2009', '2010',
+'2011','2012', '2013', '2014','2015', '2016', '2017', '2018','2019','2020','2021','2022','2023']
 
 var excludedClasses = [
     "NÃO OBSERVADO",
@@ -25,30 +17,30 @@ var excludedClasses = [
 ];
 
 var classes = ee.Dictionary({
-    'AFLORAMENTO ROCHOSO': 29,
-    "APICUM": 32,
-    "AQUICULTURA": 31,
-    "CAMPO ALAGADO E ÁREA PANTANOSA": 11,
-    "LAVOURA TEMPORÁRIA": 19,
-    "LAVOURA PERENE": 36,
-    "CANA": 20,
-    "FLORESTA PLANTADA": 9,
-    "FORMAÇÃO CAMPESTRE": 12,
-    "FORMAÇÃO FLORESTAL": 3,
-    'FORMAÇ��O FLORESTAL': 3,
-    "FORMAÇÃO SAVÂNICA": 4,
-    "INFRAESTRUTURA URBANA": 24,
-    "MANGUE": 5,
-    "MINERAÇÃO": 30,
-    "NÃO OBSERVADO": 0,
-    "OUTRA FORMAÇÃO NÃO FLORESTAL": 13,
-    "OUTRA ÁREA NÃO VEGETADA": 25,
-    "PASTAGEM": 15,
-    "PRAIA E DUNA": 23,
-    'RESTINGA HERBÁCEA': 50,
-    "RIO, LAGO E OCEANO": 33,
-    'VEGETAÇÃO URBANA': 24,
-    'FLORESTA INUNDÁVEL': 3,
+  'AFLORAMENTO ROCHOSO':29,
+  "APICUM": 32,
+  "AQUICULTURA": 31,
+  "CAMPO ALAGADO E ÁREA PANTANOSA": 11,
+  "LAVOURA TEMPORÁRIA": 19,
+  "LAVOURA PERENE": 36,
+  "CANA": 20,
+  "FLORESTA PLANTADA": 9,
+  "FORMAÇÃO CAMPESTRE": 12,
+  "FORMAÇÃO FLORESTAL": 3,
+  'FORMAÇ��O FLORESTAL':3,
+  "FORMAÇÃO SAVÂNICA": 4,
+  "INFRAESTRUTURA URBANA": 24,
+  "MANGUE": 5,
+  "MINERAÇÃO": 30,
+  "NÃO OBSERVADO": 0,
+  "OUTRA FORMAÇÃO NÃO FLORESTAL": 13,
+  "OUTRA ÁREA NÃO VEGETADA": 25,
+  "PASTAGEM": 15,
+  "PRAIA E DUNA": 23,
+  'RESTINGA HERBÁCEA':50,
+  "RIO, LAGO E OCEANO": 33,
+  'VEGETAÇÃO URBANA': 24,
+  'FLORESTA INUNDÁVEL':3,
 });
 
 var assetSamples = 'projects/mapbiomas-workspace/VALIDACAO/mapbiomas_85k_col4_points_w_edge_and_edited_v1';
