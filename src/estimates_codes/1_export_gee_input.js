@@ -51,8 +51,8 @@ var classes = ee.Dictionary({
     'FLORESTA INUNDÁVEL': 3,
 });
 
-var assetSamples = 'projects/mapbiomas-workspace/VALIDACAO/mapbiomas_85k_col3_points_w_edge_and_edited_v3';
-var assetMapBiomas = 'projects/mapbiomas-workspace/public/collection8/mapbiomas_collection80_integration_v1'
+var assetSamples = 'projects/mapbiomas-workspace/VALIDACAO/mapbiomas_85k_col4_points_w_edge_and_edited_v1';
+var assetMapBiomas = 'projects/mapbiomas-public/assets/brazil/lulc/collection9/mapbiomas_collection90_integration_v1'
 
 var folder = 'ACC_COL8_v9_6_no_EDGE'
 
