@@ -19,7 +19,8 @@ If you want to dig more deep about the accuracy approach, you could acess this [
       
       * PATH =  C:\ProgramData\Miniconda3; C:\ProgramData\Miniconda3\Library\bin; C:\ProgramData\Miniconda3\Scripts;
   
-  * Install scikit-learn library using **conda install -c intel scikit-learn** on system terminal (windows prompt)   
+  * Install scikit-learn library using **conda install -c intel scikit-learn** on system terminal (windows prompt)
+  * Install pandas, pyarrow and fastparquet libraries using **conda install pandas pyarrow fastparquet** on system terminal (windows prompt) 
 
 # How to use
 
