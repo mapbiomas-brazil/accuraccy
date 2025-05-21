@@ -53,7 +53,7 @@ var assetSamples = 'projects/mapbiomas-workspace/VALIDACAO/mapbiomas_85k_col4_po
 var assetMapBiomas = 'projects/mapbiomas-public/assets/brazil/lulc/collection9/mapbiomas_collection90_integration_v1'
 
 // Folder where exported files will be saved
-var folder = 'ACC_COL8_v9_6_no_EDGE'
+var folder = 'ACC_COL9_v9_6_no_EDGE'
 
 // Loop over years to process data
 for (var Year in anos) {
