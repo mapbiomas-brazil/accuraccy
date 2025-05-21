@@ -9,6 +9,10 @@ If you want to dig more deep about the accuracy approach, you could acess this [
   * Python 3.7 or above
   
   * scikit-learn library for Python
+
+  * pandas library for Python
+
+  * pyarrow and fastparquet library for Python
   
   **Recommendations**: 
    * For Windows, install [Miniconda - Python 3.7](https://docs.conda.io/en/latest/miniconda.html) or above and add it to the system variable PATH like:
