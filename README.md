@@ -30,6 +30,4 @@ If you want to dig more deep about the accuracy approach, you could acess this [
 
 ## 2. Getting Accuracy Assessment information with Python
 
-  Open your system terminal and run the following line like **python3 src/estimates_codes/2_accuracy_estimates.py <INPUT_DIR> <OUTPUT_DIR>**. Enter the directory address of the exported files as INPUT_DIR and the output files as OUTPUT_DIR. Sit in a comfortable chair, grab a book, a coffee and wait ... this process can take a while.
-  
-UNDER CONSTRUCTION FOR COL.9 LAUNCH
+  Open your system terminal and run the following line like **python3 src/estimates_codes/2_accuracy_estimates.py <INPUT_DIR> <OUTPUT_DIR> <COLLECTION_NAME> <OUTPUT_FILENAME>**. Enter the directory address of the exported files as INPUT_DIR and the output files as OUTPUT_DIR. Also, give a name for your data collection in COLLECTION_NAME (e.g. "c8") and file name (e.g. "accuracy_mapbiomas_col8") in OUTPUT_FILENAME. Sit in a comfortable chair, grab a book, a coffee and wait ... this process can take a while.
